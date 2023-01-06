@@ -37,6 +37,7 @@ function NavbarComponent() {
               <Nav className="justify-content-end flex-grow-1 pe-1">
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/reservar">Reservaciones</Nav.Link>
+                <Nav.Link href="/menu">Nuestro menú</Nav.Link>
                 <Nav.Link href="/registro">Ver Registro</Nav.Link>
               </Nav>
             </Offcanvas.Body>
