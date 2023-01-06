@@ -1,20 +1,39 @@
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
+import React from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-function FooterComponent() {
+const FooterComponent = () => {
   return (
-    <Card className="text-center">
-      <Card.Header>Featured</Card.Header>
-      <Card.Body>
-        <Card.Title>Special title treatment</Card.Title>
-        <Card.Text>
-          With supporting text below as a natural lead-in to additional content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
-      <Card.Footer className="text-muted">2 days ago</Card.Footer>
-    </Card>
+    <footer>
+      <Container className="text-center py-3">
+        <Row className="py-3">
+          <Col>
+            <Link>
+              <i className="fa-2x fa-brands fa-facebook"></i>
+            </Link>
+          </Col>
+          <Col>
+            <Link>
+              <i className="fa-2x fa-brands fa-instagram"></i>
+            </Link>
+          </Col>
+          <Col>
+            <Link>
+              <i className="fa-2x fa-brands fa-twitter"></i>
+            </Link>
+          </Col>
+          <Col>
+            <Link>
+              <i className="fa-2x fa-brands fa-tiktok"></i>
+            </Link>
+          </Col>
+        </Row>
+        <Row>
+          <Col>Copyright &copy; TLALLI</Col>
+        </Row>
+      </Container>
+    </footer>
   );
-}
+};
 
 export default FooterComponent;
