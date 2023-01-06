@@ -2,6 +2,7 @@ import React from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import mainHamburger from "../Images/mainHamburger.jpg";
 import "../App.css";
+import { NavLink } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -20,10 +21,22 @@ const HomePage = () => {
       >
         <Col className="text-center d-flex justify-content-center">
           <Row style={{ margin: "auto" }}>
-            <h1>¿Antojo de una hamburguesa?</h1>
-            <h5>
-              Reserva a través del siguiente botón o al whatsapp 777 123 4567
-            </h5>
+            <Col>
+              <Row>
+                <h1>¿Antojo de una hamburguesa?</h1>
+                <h5>
+                  Reserva a través del siguiente botón o al whatsapp 777 123
+                  4567
+                </h5>
+              </Row>
+              <Row>
+                <Col>
+                  <NavLink className="btn btn-light" size="lg" to={`/reservar`}>
+                    Reservar
+                  </NavLink>
+                </Col>
+              </Row>
+            </Col>
           </Row>
         </Col>
       </Row>

@@ -24,6 +24,7 @@ const HacerReservaPage = () => {
     fecha: "",
     nombre: "",
     apellido: "",
+    cel: "",
     personas: 0,
     hora: "",
   });
@@ -86,6 +87,19 @@ const HacerReservaPage = () => {
                       value={form.apellido}
                       onChange={(e) =>
                         setForm({ ...form, apellido: e.target.value })
+                      }
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group className="mb-3" controlId="cel">
+                    <Form.Label>Celular</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Ingresa tu celular"
+                      value={form.cel}
+                      onChange={(e) =>
+                        setForm({ ...form, cel: e.target.value })
                       }
                     />
                   </Form.Group>
@@ -154,7 +168,7 @@ const HacerReservaPage = () => {
               <tr>
                 <th>Fecha</th>
                 <th>Nombre</th>
-                <th>Apellido</th>
+                <th>telefono</th>
                 <th>Personas</th>
                 <th>Hora</th>
                 <th>Acción</th>
@@ -162,8 +176,10 @@ const HacerReservaPage = () => {
               {reservas.map((reserva) => (
                 <tr key={reserva.id}>
                   <td>{reserva.fecha}</td>
-                  <td>{reserva.nombre}</td>
-                  <td>{reserva.apellido}</td>
+                  <td>
+                    {reserva.nombre} {reserva.apellido}
+                  </td>
+                  <td>{reserva.cel}</td>
                   <td>{reserva.personas}</td>
                   <td>{reserva.hora}</td>
                   <td>
