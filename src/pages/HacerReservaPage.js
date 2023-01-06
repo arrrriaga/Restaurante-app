@@ -1,16 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, ButtonGroup, Form, Table } from "react-bootstrap";
-import { collection, getDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 
 const HacerReservaPage = () => {
+  const [reservas, setReserva] = useState([]);
+  const [form, setForm] = useState({
+    fecha: "",
+    nombre: "",
+    apellido: "",
+    personas: 0,
+    hora: "",
+  });
+
   const obtenerReservas = async () => {
     const resp = await getDocs(collection(db, "reservas"));
     const data = resp.docs.map((reserva) => ({
       id: reserva.id,
       ...reserva.data(),
     }));
-    console.log("Reservas obtenidas: ", data);
+
+    setReserva(data);
+  };
+
+  const crearReserva = () => {
+    const coleccionReservas = collection(db, "reservas");
+    addDoc(coleccionReservas, form);
+    obtenerReservas();
   };
 
   return (
@@ -23,31 +39,58 @@ const HacerReservaPage = () => {
           <Form>
             <Form.Group className="mb-3" controlId="nombre">
               <Form.Label>Nombre</Form.Label>
-              <Form.Control type="text" placeholder="Ingresa tu nombre" />
+              <Form.Control
+                type="text"
+                placeholder="Ingresa tu nombre"
+                value={form.nombre}
+                onChange={(e) => setForm({ ...form, nombre: e.target.value })}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="apellido">
               <Form.Label>Apellido</Form.Label>
-              <Form.Control type="text" placeholder="Ingresa tu apellido" />
+              <Form.Control
+                type="text"
+                placeholder="Ingresa tu apellido"
+                value={form.apellido}
+                onChange={(e) => setForm({ ...form, apellido: e.target.value })}
+              />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="personas">
               <Form.Label>Número de personas</Form.Label>
-              <Form.Control type="number" placeholder="Número de personas" />
+              <Form.Control
+                type="number"
+                placeholder="Número de personas"
+                value={form.personas}
+                onChange={(e) => setForm({ ...form, personas: e.target.value })}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="fecha">
               <Form.Label>Fecha a reservar</Form.Label>
-              <Form.Control type="date" placeholder="Fecha" />
+              <Form.Control
+                type="date"
+                placeholder="Fecha"
+                value={form.fecha}
+                onChange={(e) => setForm({ ...form, fecha: e.target.value })}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="hora">
               <Form.Label>Hora a reservar</Form.Label>
-              <Form.Control type="time" placeholder="Hora de reservación" />
+              <Form.Control
+                type="time"
+                placeholder="Hora de reservación"
+                value={form.hora}
+                onChange={(e) => setForm({ ...form, hora: e.target.value })}
+              />
             </Form.Group>
 
             <ButtonGroup aria-label="Basic example">
               <Button variant="primary" onClick={obtenerReservas}>
                 Obtener reservas
               </Button>
-              <Button variant="success">Crear reservación</Button>
+              <Button variant="success" onClick={crearReserva}>
+                Crear reservación
+              </Button>
             </ButtonGroup>
           </Form>
         </article>
@@ -56,33 +99,30 @@ const HacerReservaPage = () => {
         <article>
           <h1>A continuación se observan las reservaciones creadas</h1>
           <Table striped bordered hover>
-            <thead>
+            <thead className="text-center">
               <tr>
-                <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Username</th>
+                <th>Fecha</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Personas</th>
+                <th>Hora</th>
+                <th>Acción</th>
               </tr>
+              {reservas.map((reserva) => (
+                <tr key={reserva.id}>
+                  <td>{reserva.fecha}</td>
+                  <td>{reserva.nombre}</td>
+                  <td>{reserva.apellido}</td>
+                  <td>{reserva.personas}</td>
+                  <td>{reserva.hora}</td>
+                  <td>
+                    <Button variant="warning">Actualizar</Button>{" "}
+                    <Button variant="danger">Borrar</Button>
+                  </td>
+                </tr>
+              ))}
             </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td colSpan={2}>Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
+            <tbody></tbody>
           </Table>
         </article>
       </section>
