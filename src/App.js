@@ -1,4 +1,3 @@
-import { Container } from "react-bootstrap";
 import "./App.css";
 import FooterComponent from "./components/Footer";
 import NavbarComponent from "./components/Navbar";
@@ -8,11 +7,9 @@ function App() {
   return (
     <>
       <NavbarComponent />
-      <Container>
-        <main>
-          <AppRoutes />
-        </main>
-      </Container>
+      <main>
+        <AppRoutes />
+      </main>
       <FooterComponent />
     </>
   );

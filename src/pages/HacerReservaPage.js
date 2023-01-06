@@ -1,6 +1,21 @@
 import React, { useState } from "react";
-import { Button, ButtonGroup, Form, Table } from "react-bootstrap";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  Button,
+  ButtonGroup,
+  Col,
+  Container,
+  Form,
+  Row,
+  Table,
+} from "react-bootstrap";
+import {
+  collection,
+  doc,
+  addDoc,
+  getDocs,
+  updateDoc,
+  deleteDoc,
+} from "firebase/firestore";
 import { db } from "../firebase/firebase";
 
 const HacerReservaPage = () => {
@@ -23,76 +38,112 @@ const HacerReservaPage = () => {
     setReserva(data);
   };
 
-  const crearReserva = () => {
+  const crearReserva = async () => {
     const coleccionReservas = collection(db, "reservas");
     addDoc(coleccionReservas, form);
+    obtenerReservas();
+  };
+  const eliminarReserva = async (idReserva) => {
+    const documento = doc(db, "reservas", idReserva);
+    await deleteDoc(documento);
+    obtenerReservas();
+  };
+  const actualizarReserva = async (idReserva) => {
+    const documento = doc(db, "reservas", idReserva);
+    await updateDoc(documento, form);
     obtenerReservas();
   };
 
   return (
     <>
-      <header>
+      <header className="text-center">
         <h1>Crear nueva reservación</h1>
       </header>
       <section>
         <article>
-          <Form>
-            <Form.Group className="mb-3" controlId="nombre">
-              <Form.Label>Nombre</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Ingresa tu nombre"
-                value={form.nombre}
-                onChange={(e) => setForm({ ...form, nombre: e.target.value })}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="apellido">
-              <Form.Label>Apellido</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Ingresa tu apellido"
-                value={form.apellido}
-                onChange={(e) => setForm({ ...form, apellido: e.target.value })}
-              />
-            </Form.Group>
+          <Container>
+            <Form>
+              <Row>
+                <Col>
+                  <Form.Group className="mb-3" controlId="nombre">
+                    <Form.Label>Nombre</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Ingresa tu nombre"
+                      value={form.nombre}
+                      onChange={(e) =>
+                        setForm({ ...form, nombre: e.target.value })
+                      }
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group className="mb-3" controlId="apellido">
+                    <Form.Label>Apellido</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Ingresa tu apellido"
+                      value={form.apellido}
+                      onChange={(e) =>
+                        setForm({ ...form, apellido: e.target.value })
+                      }
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
 
-            <Form.Group className="mb-3" controlId="personas">
-              <Form.Label>Número de personas</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Número de personas"
-                value={form.personas}
-                onChange={(e) => setForm({ ...form, personas: e.target.value })}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="fecha">
-              <Form.Label>Fecha a reservar</Form.Label>
-              <Form.Control
-                type="date"
-                placeholder="Fecha"
-                value={form.fecha}
-                onChange={(e) => setForm({ ...form, fecha: e.target.value })}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="hora">
-              <Form.Label>Hora a reservar</Form.Label>
-              <Form.Control
-                type="time"
-                placeholder="Hora de reservación"
-                value={form.hora}
-                onChange={(e) => setForm({ ...form, hora: e.target.value })}
-              />
-            </Form.Group>
+              <Row>
+                <Col>
+                  <Form.Group className="mb-3" controlId="fecha">
+                    <Form.Label>Fecha a reservar</Form.Label>
+                    <Form.Control
+                      type="date"
+                      placeholder="Fecha"
+                      value={form.fecha}
+                      onChange={(e) =>
+                        setForm({ ...form, fecha: e.target.value })
+                      }
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group className="mb-3" controlId="hora">
+                    <Form.Label>Hora a reservar</Form.Label>
+                    <Form.Control
+                      type="time"
+                      placeholder="Hora de reservación"
+                      value={form.hora}
+                      onChange={(e) =>
+                        setForm({ ...form, hora: e.target.value })
+                      }
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group className="mb-3" controlId="personas">
+                    <Form.Label># de personas</Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="Número de personas"
+                      value={form.personas}
+                      onChange={(e) =>
+                        setForm({ ...form, personas: e.target.value })
+                      }
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
 
-            <ButtonGroup aria-label="Basic example">
-              <Button variant="primary" onClick={obtenerReservas}>
-                Obtener reservas
-              </Button>
-              <Button variant="success" onClick={crearReserva}>
-                Crear reservación
-              </Button>
-            </ButtonGroup>
-          </Form>
+              <ButtonGroup aria-label="Basic example">
+                <Button variant="primary" onClick={obtenerReservas}>
+                  Obtener reservas
+                </Button>
+                <Button variant="success" onClick={crearReserva}>
+                  Crear reservación
+                </Button>
+              </ButtonGroup>
+            </Form>
+          </Container>
         </article>
       </section>
       <section>
@@ -116,8 +167,18 @@ const HacerReservaPage = () => {
                   <td>{reserva.personas}</td>
                   <td>{reserva.hora}</td>
                   <td>
-                    <Button variant="warning">Actualizar</Button>{" "}
-                    <Button variant="danger">Borrar</Button>
+                    <Button
+                      variant="warning"
+                      onClick={() => actualizarReserva(reserva.id)}
+                    >
+                      Actualizar
+                    </Button>{" "}
+                    <Button
+                      variant="danger"
+                      onClick={() => eliminarReserva(reserva.id)}
+                    >
+                      Borrar
+                    </Button>
                   </td>
                 </tr>
               ))}
