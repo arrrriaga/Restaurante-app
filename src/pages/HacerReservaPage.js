@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Button,
   ButtonGroup,
@@ -6,20 +6,12 @@ import {
   Container,
   Form,
   Row,
-  Table,
 } from "react-bootstrap";
-import {
-  collection,
-  doc,
-  addDoc,
-  getDocs,
-  updateDoc,
-  deleteDoc,
-} from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
+import Swal from "sweetalert2";
 
 const HacerReservaPage = () => {
-  const [reservas, setReserva] = useState([]);
   const [form, setForm] = useState({
     fecha: "",
     nombre: "",
@@ -29,37 +21,16 @@ const HacerReservaPage = () => {
     hora: "",
   });
 
-  const obtenerReservas = async () => {
-    const resp = await getDocs(collection(db, "reservas"));
-    const data = resp.docs.map((reserva) => ({
-      id: reserva.id,
-      ...reserva.data(),
-    }));
-
-    setReserva(data);
-  };
-
-  const crearReserva = async () => {
+  const crearReserva = async (event) => {
     const coleccionReservas = collection(db, "reservas");
     addDoc(coleccionReservas, form);
-    obtenerReservas();
+    Swal.fire(
+      "¡Estamos muy emocioados por recibirte!",
+      "¡Reservación creada con éxito!",
+      "success"
+    );
+    event.target.reset();
   };
-  const eliminarReserva = async (idReserva) => {
-    const documento = doc(db, "reservas", idReserva);
-    await deleteDoc(documento);
-    obtenerReservas();
-  };
-  const actualizarReserva = async (idReserva) => {
-    const documento = doc(db, "reservas", idReserva);
-    await updateDoc(documento, form);
-    obtenerReservas();
-  };
-
-  useEffect(() => {
-    obtenerReservas();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <>
@@ -161,49 +132,6 @@ const HacerReservaPage = () => {
               </ButtonGroup>
             </Form>
           </Container>
-        </article>
-      </section>
-      <section>
-        <article>
-          <h1>A continuación se observan las reservaciones creadas</h1>
-          <Table striped bordered hover>
-            <thead className="text-center">
-              <tr>
-                <th>Fecha</th>
-                <th>Nombre</th>
-                <th>telefono</th>
-                <th>Personas</th>
-                <th>Hora</th>
-                <th>Acción</th>
-              </tr>
-              {reservas.map((reserva) => (
-                <tr key={reserva.id}>
-                  <td>{reserva.fecha}</td>
-                  <td>
-                    {reserva.nombre} {reserva.apellido}
-                  </td>
-                  <td>{reserva.cel}</td>
-                  <td>{reserva.personas}</td>
-                  <td>{reserva.hora}</td>
-                  <td>
-                    <Button
-                      variant="warning"
-                      onClick={() => actualizarReserva(reserva.id)}
-                    >
-                      Actualizar
-                    </Button>{" "}
-                    <Button
-                      variant="danger"
-                      onClick={() => eliminarReserva(reserva.id)}
-                    >
-                      Borrar
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </thead>
-            <tbody></tbody>
-          </Table>
         </article>
       </section>
     </>
