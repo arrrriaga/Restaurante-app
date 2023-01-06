@@ -17,7 +17,7 @@ function NavbarComponent() {
         expand={expand}
         className="NAV"
       >
-        <Container fluid>
+        <Container>
           <Navbar.Brand href="/">
             <img src={LOGO} alt="TLALLI" height={50}></img>
           </Navbar.Brand>

@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  Button,
-  ButtonGroup,
-  Col,
-  Container,
-  Form,
-  Row,
-} from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import Swal from "sweetalert2";
@@ -26,7 +19,7 @@ const HacerReservaPage = () => {
     addDoc(coleccionReservas, form);
     Swal.fire(
       "¡Estamos muy emocioados por recibirte!",
-      "¡Reservación creada con éxito!",
+      "¡Reservación creada con éxito a reserva de disponibilidad! Te contactaremos a tu teléfono en caso no haya espacios disponibles.",
       "success"
     );
     event.target.reset();
@@ -125,11 +118,13 @@ const HacerReservaPage = () => {
                 </Col>
               </Row>
 
-              <ButtonGroup aria-label="Basic example">
-                <Button variant="success" onClick={crearReserva}>
-                  Crear reservación
-                </Button>
-              </ButtonGroup>
+              <Row>
+                <Col className=" d-flex align-items-center justify-content-center">
+                  <Button variant="success" onClick={crearReserva}>
+                    Crear reservación
+                  </Button>
+                </Col>
+              </Row>
             </Form>
           </Container>
         </article>

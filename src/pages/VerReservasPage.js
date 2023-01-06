@@ -7,15 +7,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  ButtonGroup,
-  Col,
-  Container,
-  Form,
-  Row,
-  Table,
-} from "react-bootstrap";
+import { Button, Col, Container, Form, Row, Table } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { db } from "../firebase/firebase";
 
@@ -172,17 +164,19 @@ const VerReservasPage = () => {
                 </Col>
               </Row>
 
-              <ButtonGroup aria-label="Basic example">
-                <Button variant="success" onClick={crearReserva}>
-                  Crear reservación
-                </Button>
-              </ButtonGroup>
+              <Row>
+                <Col className=" d-flex align-items-center justify-content-center">
+                  <Button variant="success" onClick={crearReserva}>
+                    Crear reservación
+                  </Button>
+                </Col>
+              </Row>
             </Form>
           </Container>
         </article>
       </section>
       <section>
-        <article>
+        <article className="text-center mt-3">
           <h1>A continuación se observan las reservaciones creadas</h1>
           <Table striped bordered hover>
             <thead className="text-center">
