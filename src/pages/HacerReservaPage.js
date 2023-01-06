@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   ButtonGroup,
@@ -54,6 +54,12 @@ const HacerReservaPage = () => {
     await updateDoc(documento, form);
     obtenerReservas();
   };
+
+  useEffect(() => {
+    obtenerReservas();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -149,9 +155,6 @@ const HacerReservaPage = () => {
               </Row>
 
               <ButtonGroup aria-label="Basic example">
-                <Button variant="primary" onClick={obtenerReservas}>
-                  Obtener reservas
-                </Button>
                 <Button variant="success" onClick={crearReserva}>
                   Crear reservación
                 </Button>
