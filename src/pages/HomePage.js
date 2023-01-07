@@ -69,11 +69,14 @@ const HomePage = () => {
               excepcional.
             </h2>
           </Row>
-          <Row>
+          <Row className="text-center">
             <p style={{ fontSize: "20px", color: "green" }}>
               ¿Te gustan las hamburguesas deliciosas y hechas con ingredientes
-              frescos y de alta calidad? ¡Te esperamos en Las hamburguesas del
-              Don! No somos un restaurante de comida rápida, damos buena comida
+              frescos y de alta calidad?
+              <br />
+              ¡Te esperamos en Las hamburguesas del Don!
+              <br />
+              No somos un restaurante de comida rápida, damos buena comida
               rápido.
             </p>
           </Row>
