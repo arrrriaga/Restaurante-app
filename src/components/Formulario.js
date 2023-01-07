@@ -54,7 +54,7 @@ const FormularioComponent = (tipo) => {
             <Form.Group className="mb-3" controlId="cel">
               <Form.Label>Celular</Form.Label>
               <Form.Control
-                type="text"
+                type="number"
                 placeholder="Ingresa tu celular"
                 value={form.cel}
                 onChange={(e) => setForm({ ...form, cel: e.target.value })}
