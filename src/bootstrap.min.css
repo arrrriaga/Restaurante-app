@@ -313,10 +313,10 @@ caption {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   color: #7a8288;
-  text-align: left;
+  text-align: center;
 }
 th {
-  text-align: inherit;
+  text-align: center;
   text-align: -webkit-match-parent;
 }
 tbody,
