@@ -186,7 +186,7 @@ const VerReservasPage = () => {
                   </Row>
 
                   <Row>
-                    <Col>
+                    <Col xs={6} md={4}>
                       <Form.Group className="mb-3" controlId="fecha">
                         <Form.Label>Fecha a reservar</Form.Label>
                         <Form.Control
@@ -199,7 +199,7 @@ const VerReservasPage = () => {
                         />
                       </Form.Group>
                     </Col>
-                    <Col>
+                    <Col xs={6} md={4}>
                       <Form.Group className="mb-3" controlId="hora">
                         <Form.Label>Hora a reservar</Form.Label>
                         <Form.Control
@@ -212,7 +212,7 @@ const VerReservasPage = () => {
                         />
                       </Form.Group>
                     </Col>
-                    <Col>
+                    <Col xs={12} md={4}>
                       <Form.Group className="mb-3" controlId="personas">
                         <Form.Label># de personas</Form.Label>
                         <Form.Control
