@@ -128,7 +128,12 @@ const VerReservasPage = () => {
                   sm={12}
                   className="mt-1 d-flex align-items-center justify-content-center"
                 >
-                  <Button variant="primary" type="submit" size="lg">
+                  <Button
+                    className="mb-2"
+                    variant="primary"
+                    type="submit"
+                    size="lg"
+                  >
                     Acceder
                   </Button>
                 </Col>
