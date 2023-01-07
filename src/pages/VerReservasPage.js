@@ -39,7 +39,11 @@ const VerReservasPage = () => {
     if (password === apiKey) {
       setShowTable(true);
     } else {
-      alert("Contraseña incorrecta");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "¡Contraseña incorrecta!",
+      });
     }
   };
 
