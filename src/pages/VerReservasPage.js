@@ -34,19 +34,23 @@ const VerReservasPage = () => {
   const [showTable, setShowTable] = useState(false);
 
   const handleSubmit = (event) => {
-    const apiKey = process.env.REACT_APP_API_KEY;
+    const apiKey = `${process.env.REACT_APP_API_KEY}`;
     event.preventDefault();
     if (password === apiKey) {
       setShowTable(true);
     } else {
       alert("Contraseña incorrecta");
-      console.log(password);
     }
   };
 
   const crearReserva = async () => {
     const coleccionReservas = collection(db, "reservas");
     addDoc(coleccionReservas, form);
+    Swal.fire(
+      "¡Reservación creada para el cliente!",
+      "Favor de contactar al cliente para confirmar su reservación",
+      "success"
+    );
     obtenerReservas();
   };
 
@@ -78,8 +82,8 @@ const VerReservasPage = () => {
         "Se actualizará con los datos ingresados en el formulario ¿deseas continuar?",
       showDenyButton: true,
       showCancelButton: false,
-      confirmButtonText: "Save",
-      denyButtonText: `Don't save`,
+      confirmButtonText: "Actualizar",
+      denyButtonText: `NO actualizar`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -101,6 +105,9 @@ const VerReservasPage = () => {
     <>
       <header className="text-center mt-5 mb-3">
         <h1>Esta página es sólo para administradores</h1>
+        <h6 style={{ color: "red" }}>
+          Para poder probar esta función utilizar la contraseña: papasconqueso
+        </h6>
       </header>
       <Container>
         <Row>

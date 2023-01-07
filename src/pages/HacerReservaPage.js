@@ -22,7 +22,6 @@ const HacerReservaPage = () => {
       "¡Reservación creada con éxito a reserva de disponibilidad! Te contactaremos a tu teléfono en caso no haya espacios disponibles.",
       "success"
     );
-    event.target.reset();
   };
 
   return (
