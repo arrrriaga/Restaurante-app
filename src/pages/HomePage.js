@@ -21,7 +21,7 @@ const HomePage = () => {
         }}
       >
         <Col className="text-center ">
-          <Row style={{ height: "90%" }}>
+          <Row style={{ height: "100%" }}>
             <Col style={{ margin: "auto" }}>
               <Row>
                 <h1>¿Antojo de una hamburguesa?</h1>
@@ -37,11 +37,6 @@ const HomePage = () => {
                   </NavLink>
                 </Col>
               </Row>
-            </Col>
-          </Row>
-          <Row style={{ height: "10%" }}>
-            <Col>
-              <h5>Scroll Para Ver Más</h5>
             </Col>
           </Row>
         </Col>
@@ -69,15 +64,16 @@ const HomePage = () => {
         <Col sm={8}>
           <Row className="text-center">
             <h2 style={{ color: "red" }}>
-              5 años de brindar hamburguesas deliciosas y servicio excepcional.
+              5 años de brindar hamburguesas deliciosas y un servicio
+              excepcional.
             </h2>
           </Row>
           <Row>
             <p style={{ fontSize: "20px", color: "green" }}>
               ¿Te gustan las hamburguesas deliciosas y hechas con ingredientes
-              frescos y de alta calidad? ¡Te esperamos en El don de las
-              hamburguesas! No somos un restaurante de comida rápida, damos
-              buena comida rápido.
+              frescos y de alta calidad? ¡Te esperamos en Las hamburguesas del
+              Don! No somos un restaurante de comida rápida, damos buena comida
+              rápido.
             </p>
           </Row>
         </Col>

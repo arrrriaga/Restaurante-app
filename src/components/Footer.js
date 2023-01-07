@@ -29,7 +29,7 @@ const FooterComponent = () => {
           </Col>
         </Row>
         <Row>
-          <Col>Copyright &copy; TLALLI</Col>
+          <Col>Copyright &copy; Las hamburguesas del Don</Col>
         </Row>
       </Container>
     </footer>
