@@ -29,6 +29,7 @@ const HomePage = () => {
                   Reserva a través del siguiente botón o al whatsapp 777 123
                   4567
                 </h5>
+                <h6>Horario de lunes a domingo 10am - 10pm</h6>
               </Row>
               <Row>
                 <Col>
