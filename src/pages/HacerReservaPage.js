@@ -27,15 +27,15 @@ const HacerReservaPage = () => {
 
   return (
     <>
-      <header className="text-center">
+      <header className="text-center my-5">
         <h1>Crear nueva reservación</h1>
       </header>
       <section>
-        <article>
+        <article style={{ margin: "auto" }}>
           <Container>
             <Form>
               <Row>
-                <Col>
+                <Col sm={4}>
                   <Form.Group className="mb-3" controlId="nombre">
                     <Form.Label>Nombre</Form.Label>
                     <Form.Control
@@ -48,7 +48,7 @@ const HacerReservaPage = () => {
                     />
                   </Form.Group>
                 </Col>
-                <Col>
+                <Col sm={4}>
                   <Form.Group className="mb-3" controlId="apellido">
                     <Form.Label>Apellido</Form.Label>
                     <Form.Control
@@ -61,7 +61,7 @@ const HacerReservaPage = () => {
                     />
                   </Form.Group>
                 </Col>
-                <Col>
+                <Col sm={4}>
                   <Form.Group className="mb-3" controlId="cel">
                     <Form.Label>Celular</Form.Label>
                     <Form.Control
